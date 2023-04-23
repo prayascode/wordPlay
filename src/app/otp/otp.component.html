@@ -1,0 +1,41 @@
+<form class="main-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      matInput
+      [formControl]="emailFormControl"
+      [errorStateMatcher]="matcher"
+      placeholder="Ex. pat@example.com"
+    />
+    <mat-error
+      *ngIf="
+        emailFormControl.hasError('email') &&
+        !emailFormControl.hasError('required')
+      "
+    >
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <!-- Otp -->
+  <div class="otp-div">
+    <mat-form-field>
+      <mat-label>OTP</mat-label>
+      <input
+        #otpCode
+        maxlength="4"
+        matInput
+        [formControl]="OtpFormControl"
+        placeholder="Enter 4 Digit OTP"
+      />
+      <mat-hint align="end">{{ otpCode.value.length }} / 5</mat-hint>
+      <mat-error *ngIf="OtpFormControl.hasError('required')">
+        OTP is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary">Submit</button>
+  </div>
+</form>
